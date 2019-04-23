@@ -19,10 +19,16 @@ def generate_code():
     strs, code_img = ic.randChinese(4)
     session['S_RECAPTCHA'] = strs
     buf = StringIO.StringIO()
-    code_img.save(buf, 'JPEG', quality=80)
-    buf_str = buf.getvalue()
-    response = current_app.make_response(buf_str)
-    response.headers['Content-Type'] = 'image/jpeg'
+    try:
+        code_img.save(buf, 'JPEG', quality=80)
+        buf_str = buf.getvalue()
+        response = current_app.make_response(buf_str)
+        response.headers['Content-Type'] = 'image/jpeg'
+    except:
+        code_img.save(buf, 'PNG', quality=80)
+        buf_str = buf.getvalue()
+        response = current_app.make_response(buf_str)
+        response.headers['Content-Type'] = 'image/png'
     return response
 
 
