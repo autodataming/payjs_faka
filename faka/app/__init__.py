@@ -11,6 +11,8 @@ from datetime import timedelta
 
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
+
 app.config.from_object('config')
 login_manager = LoginManager(app)
 login_manager.session_protect = 'strong'
